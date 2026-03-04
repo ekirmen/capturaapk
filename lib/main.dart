@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 // --- MODELOS ---
 class ScaffoldCategory {
@@ -208,7 +208,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       
       // 3. Guardar directamente en la Galería del teléfono
-      final result = await ImageGallerySaver.saveImage(
+      final result = await ImageGallerySaverPlus.saveImage(
         pngBytes,
         quality: 100,
         name: "captura_$timestamp"
