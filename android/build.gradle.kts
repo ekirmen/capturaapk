@@ -20,21 +20,12 @@ subprojects {
 }
 
 subprojects {
-    val project = this
-    val configureProject = {
-        if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
-            val android = project.extensions.getByName("android") as com.android.build.gradle.BaseExtension
-            android.compileSdkVersion(34)
-            if (android.namespace == null) {
-                android.namespace = "com.example.${project.name.replace("-", "_").replace(":", "_")}"
-            }
+    project.plugins.withType(com.android.build.gradle.BasePlugin::class.java) {
+        val android = project.extensions.getByName("android") as com.android.build.gradle.BaseExtension
+        android.compileSdkVersion(34)
+        if (android.namespace == null) {
+            android.namespace = "com.example.${project.name.replace("-", "_").replace(":", "_")}"
         }
-    }
-
-    if (project.state.executed) {
-        configureProject()
-    } else {
-        project.afterEvaluate { configureProject() }
     }
 }
 
